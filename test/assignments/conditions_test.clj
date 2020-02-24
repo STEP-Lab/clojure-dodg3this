@@ -21,3 +21,11 @@
     (is (nil? (harishchandra false))))
   (testing "nothing if nil"
     (is (nil? (harishchandra nil)))))
+
+(deftest yudishtira-says
+  (testing "the same if truthy"
+    (is (= 4 (yudishtira 4))))
+  (testing "ashwathama if false"
+    (is (= :ashwathama (yudishtira false))))
+  (testing "ashwathama if nil"
+    (is (= :ashwathama (yudishtira nil)))))
