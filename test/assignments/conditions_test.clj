@@ -29,3 +29,9 @@
     (is (= :ashwathama (yudishtira false))))
   (testing "ashwathama if nil"
     (is (= :ashwathama (yudishtira nil)))))
+
+(deftest duplicate-first-returns
+  (testing "the coll wih first element repeated"
+    (is (= [1 1 2 3] (duplicate-first [1 2 3]))))
+  (testing "nil if collection is empty"
+    (is (nil? (duplicate-first [])))))
