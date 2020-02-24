@@ -55,3 +55,13 @@
           (is (= :wonder-woman (conditions-apply '(1 2 5 3)))))
   (testing "tun tun if 1 and 3 are present but not in the same order"
           (is (= :tuntun (conditions-apply '(3 2 5 1))))))
+
+(deftest repeated-and-truncated
+  (testing "repeated to 20 chars"
+          (is (= '(0 1 2 3 0 1 2 3 0 1 2 3 0 1 2 3 0 1 2 3) (repeat-and-truncate (range 4) true false 20))))
+  (testing "truncated to 6 chars"
+          (is (= '(0 1 2 3 0 1) (repeat-and-truncate (range 4) true true 6))))
+  (testing "truncated to 6 chars"
+          (is (= '(0 1 2 3 4 5) (repeat-and-truncate (range 20) true true 6)))))
+
+

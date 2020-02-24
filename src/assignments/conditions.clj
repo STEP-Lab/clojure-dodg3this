@@ -55,7 +55,7 @@
   Otherwise it returns :universe"
   {:level        :easy
    :use          '[cond]
-   :implemented? false}
+   :implemented? true}
   [x y]
   (cond
     (= 5 y) :chetan-bhagat
@@ -84,8 +84,11 @@
   (repeat-and-truncate (range 4) true true 6) => '(0 1 2 3 0 1)"
   {:level        :medium
    :use          '[cond->> concat take]
-   :implemented? false}
-  [coll rep? truncate? n])
+   :implemented? true}
+  [coll rep? truncate? n]
+    (take n (cond->> coll
+                      rep? ((comp flatten concat repeat))
+                      truncate? (take n))))
 
 (defn order-in-words
   "Given x, y and z, returns a vector consisting of
