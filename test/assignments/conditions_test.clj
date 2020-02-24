@@ -49,3 +49,9 @@
     (is (= :greece (five-point-someone 6 4))))
   (testing "else returns :universe"
     (is (= :universe (five-point-someone 3 3)))))
+
+(deftest conditions-applied
+  (testing "wonder woman if 1 and 3 are present"
+          (is (= :wonder-woman (conditions-apply '(1 2 5 3)))))
+  (testing "tun tun if 1 and 3 are present but not in the same order"
+          (is (= :tuntun (conditions-apply '(3 2 5 1))))))
