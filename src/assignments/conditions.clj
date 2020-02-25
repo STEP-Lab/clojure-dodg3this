@@ -6,7 +6,7 @@
    :use          '[when-not zero?]
    :implemented? true}
   [x y]
-      (when-not (zero? y) (/ x y)))
+  (when-not (zero? y) (/ x y)))
 
 (defn informative-divide
   "Returns the result of x/y unless y is 0. Returns :infinite when y is 0"
@@ -72,10 +72,16 @@
   {:level        :medium
    :use          '[condp filter]
    :alternates   '[if cond]
-   :implemented? false}
+   :implemented? true}
   [coll]
-  (condp some coll
-    #{1 3} :>> #(if (and (= 1 %) (some #{3} coll)) :wonder-woman :tuntun)))
+  (condp (fn [conditions coll]
+           (let [condition-set (into #{} conditions)
+                 filtered-coll (filter #(contains? condition-set %) coll)]
+             (= conditions filtered-coll))) coll
+    '(1 3) :wonder-woman
+    '(:a :b :c) :durga
+    '([2 3] [4 5]) :cleopatra
+    :tuntun))
 
 (defn repeat-and-truncate
   "Given coll and options to repeat and truncate
@@ -86,9 +92,9 @@
    :use          '[cond->> concat take]
    :implemented? true}
   [coll rep? truncate? n]
-    (take n (cond->> coll
-                      rep? ((comp flatten concat repeat))
-                      truncate? (take n))))
+  (take n (cond->> coll
+                   rep? ((comp flatten concat repeat))
+                   truncate? (take n))))
 
 (defn order-in-words
   "Given x, y and z, returns a vector consisting of
@@ -121,7 +127,7 @@
   and prepend a 0 to the incremented list concatenated
   with the reverse of the incremented list
   [1 2 3] -> (4 3 2 0 2 3 4)"
-  {:level :easy
-   :use '[as-> reverse]
+  {:level        :easy
+   :use          '[as-> reverse]
    :implemented? false}
   [coll])

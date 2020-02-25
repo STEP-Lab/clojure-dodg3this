@@ -54,7 +54,21 @@
   (testing "wonder woman if 1 and 3 are present"
           (is (= :wonder-woman (conditions-apply '(1 2 5 3)))))
   (testing "tun tun if 1 and 3 are present but not in the same order"
-          (is (= :tuntun (conditions-apply '(3 2 5 1))))))
+          (is (= :tuntun (conditions-apply '(3 2 5 1)))))
+  (testing "tun tun if 1 and 3 are present but 1 is more than once"
+          (is (= :tuntun (conditions-apply '(3 2 5 1 5 8 1)))))
+  (testing "durga if :a :b and :c are present"
+          (is (= :durga (conditions-apply '(:a :d :b :e :c)))))
+  (testing "tun tun if :a, :b and :c are present but not in the same order"
+          (is (= :tuntun (conditions-apply '(:a :c :b :b :c)))))
+  (testing "tun tun if :a, :b and :c are present but :b is more than once"
+          (is (= :tuntun (conditions-apply '(:a :d :b :b :c)))))
+  (testing "cleaopatra if [2 3] and [4 5] are present"
+          (is (= :cleopatra (conditions-apply '([2 3] [4 5])))))
+  (testing "tun tun if [2 3] and [4 5] are present but not in the same order"
+          (is (= :tuntun (conditions-apply '([4 5] [1 1] [2 3])))))
+  (testing "tun tun if [2 3] and [4 5] are present but [2 3] and [4 5] is more than once"
+          (is (= :tuntun (conditions-apply '([2 3] [4 5] [2 3] [4 5]))))))
 
 (deftest repeated-and-truncated
   (testing "repeated to 20 chars"
